@@ -49,7 +49,9 @@ CREATE TABLE IF NOT EXISTS volunteer (
     name VARCHAR(255) NOT NULL,
     surname VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    phone VARCHAR(255) NOT NULL
+    phone VARCHAR(255) NOT NULL,
+    city_id INT NOT NULL,
+    FOREIGN KEY (city_id) REFERENCES city(id)
 );
 
 CREATE TABLE IF NOT EXISTS initiative_has_skill (
