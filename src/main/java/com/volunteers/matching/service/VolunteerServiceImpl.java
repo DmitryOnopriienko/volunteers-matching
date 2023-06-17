@@ -1,6 +1,7 @@
 package com.volunteers.matching.service;
 
 import com.volunteers.matching.dto.VolunteerDataDto;
+import com.volunteers.matching.dto.VolunteerSaveDto;
 import com.volunteers.matching.entity.Volunteer;
 import com.volunteers.matching.exception.NotFoundException;
 import com.volunteers.matching.repository.VolunteerRepository;
@@ -37,5 +38,21 @@ public class VolunteerServiceImpl implements VolunteerService {
     Volunteer volunteer = volunteerRepository.findById(id).orElseThrow(() ->
             new NotFoundException("Volunteer with id %d not found".formatted(id)));
     return modelMapper.map(volunteer, VolunteerDataDto.class);
+  }
+
+  @Override
+  public int createVolunteer(VolunteerSaveDto volunteerSaveDto) {
+    Volunteer volunteer = modelMapper.map(volunteerSaveDto, Volunteer.class);
+    volunteerRepository.save(volunteer);
+    return volunteer.getId();
+  }
+
+  @Override
+  public void updateVolunteer(VolunteerSaveDto volunteerSaveDto, int id) {
+    volunteerRepository.findById(id).orElseThrow(() ->
+            new NotFoundException("Volunteer with id %d not found".formatted(id)));
+    Volunteer volunteer = modelMapper.map(volunteerSaveDto, Volunteer.class);
+    volunteer.setId(id);
+    volunteerRepository.save(volunteer);
   }
 }
