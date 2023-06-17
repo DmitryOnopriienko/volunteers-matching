@@ -2,6 +2,7 @@ package com.volunteers.matching.service;
 
 import com.volunteers.matching.dto.VolunteerDataDto;
 import com.volunteers.matching.entity.Volunteer;
+import com.volunteers.matching.exception.NotFoundException;
 import com.volunteers.matching.repository.VolunteerRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,8 @@ public class VolunteerServiceImpl implements VolunteerService {
 
   @Override
   public VolunteerDataDto getById(int id) {
-    Volunteer volunteer = volunteerRepository.findById(id).orElseThrow();
+    Volunteer volunteer = volunteerRepository.findById(id).orElseThrow(() ->
+            new NotFoundException("Volunteer with id %d not found".formatted(id)));
     return modelMapper.map(volunteer, VolunteerDataDto.class);
   }
 }

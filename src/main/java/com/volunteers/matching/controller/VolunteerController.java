@@ -1,7 +1,6 @@
 package com.volunteers.matching.controller;
 
 import com.volunteers.matching.dto.VolunteerDataDto;
-import com.volunteers.matching.entity.Volunteer;
 import com.volunteers.matching.service.VolunteerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
