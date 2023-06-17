@@ -20,6 +20,11 @@ CREATE TABLE IF NOT EXISTS city (
     name VARCHAR(255) NOT NULL
 );
 
+INSERT INTO city (name)
+VALUES ('Kyiv'),
+       ('Lviv'),
+       ('Zaporizhya');
+
 CREATE TABLE IF NOT EXISTS organization (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
@@ -32,6 +37,15 @@ CREATE TABLE IF NOT EXISTS skill (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL
 );
+
+INSERT INTO skill (name)
+VALUES ('surgery'),
+       ('management'),
+       ('programming'),
+       ('design'),
+       ('marketing'),
+       ('cooking'),
+       ('driving');
 
 CREATE TABLE IF NOT EXISTS initiative (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -54,6 +68,11 @@ CREATE TABLE IF NOT EXISTS volunteer (
     FOREIGN KEY (city_id) REFERENCES city(id)
 );
 
+INSERT INTO volunteer (name, surname, email, phone, city_id)
+VALUES ('Ivan', 'Ivanov', 'ii@gmail.com', '050 918 27 36', 1),
+       ('Dmitry', 'Dmitriev', 'dd@gmail.com', '050 918 27 36', 2),
+       ('Alex', 'Alexov', 'aa@gmail.com', '050 918 27 36', 3);
+
 CREATE TABLE IF NOT EXISTS initiative_has_skill (
     initiative_id INT NOT NULL,
     skill_id INT NOT NULL,
@@ -69,6 +88,15 @@ CREATE TABLE IF NOT EXISTS volunteer_has_skill (
     FOREIGN KEY (volunteer_id) REFERENCES volunteer(id),
     FOREIGN KEY (skill_id) REFERENCES skill(id)
 );
+
+INSERT INTO volunteer_has_skill (volunteer_id, skill_id)
+VALUES (1, 1),
+       (1, 2),
+       (1, 3),
+       (2, 4),
+       (2, 5),
+       (3, 6),
+       (3, 7);
 
 CREATE TABLE IF NOT EXISTS initiative_proposal (
     id INT PRIMARY KEY AUTO_INCREMENT,
